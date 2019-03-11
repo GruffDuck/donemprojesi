@@ -1,0 +1,354 @@
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
+
+//#include "stdafx.h"
+
+
+#include <iostream>
+#include<fstream>
+#include<time.h>
+#include <string>
+#include <conio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+
+class matematik;
+class kayit{
+	friend matematik;
+
+public:int password;
+	   string username;
+	   string name;
+	   string surname;
+	   
+	   int alan;
+	   int ders_secim;
+	   int giris_secim;
+	   int i;
+
+
+
+
+
+public: void user_kayit(){
+
+			system("cls");
+			ofstream yourfile("kayit.txt", ios::app);
+               
+               cout<<"İsim : ";
+               cin>>name;
+               cout<<"Soyisim : ";
+               cin>>surname;
+			cout << "Kullanici Adi : ";
+			cin >> username;
+
+			cout << "Sifre : ";
+			cin >> password;
+
+		
+
+			yourfile << username << "\n" << password << "\n" << "\n" <<name<<"\n"<<surname<<"\n"<<endl;
+
+			system("cls");
+
+			cout << "\nKayit basarili Hosgeldin ";
+			cout << username << endl;
+            bekle(2);
+			alt_menu();
+
+
+}
+public:void ana_secimler(){
+         int ders_secim;
+		int giris_secim;
+		int i;
+
+
+		   cout << "\n*************************" << endl;
+		   cout << "   Egitim Similasyonu" << endl;
+		   cout << "************************* \n" << endl;
+
+
+		   cout << "1) Giris" << endl;
+		   cout << "2) Ogrenci Kayit" << endl;
+		   cout << "3)Yardım" << endl;
+		   cout << "4)Ekip" << endl;
+
+		   cout << "yapmak istediginiz islemi secin: ";
+		   cin >> giris_secim;
+
+
+
+
+		   if (giris_secim == 1)
+		   {
+			   system("cls");
+			   kayit k1;
+			   k1.user_giris();
+			   return;
+		   }
+
+
+
+
+
+		   if (giris_secim == 2){
+			   system("cls");
+
+			   
+			   system("cls");
+			   user_kayit();
+
+			   cout << "Lütfen bekle" << endl;
+			   bekle(3);
+			   return;
+		   }
+
+
+          if(giris_secim == 3){
+          	system("cls");
+          	yardim();
+		  } 
+
+
+
+		   if (giris_secim == 4){
+			   system("cls");
+			   kayit k4;
+
+			   cout << "Maded by\n" << endl;
+			   k4.bekle(1.5);
+			   cout << "Mehmet Yalınbaş" << endl;
+			   k4.bekle(1.5);
+			   cout << "Muhsin Deniz" << endl;
+			   k4.bekle(1.5);
+			   cout << "Hüseyin Taş" << endl;
+			   k4.bekle(1.5);
+			   cout << "Emirhan Koçak" << endl;
+			   system("pause");
+			   system("cls");
+			   ana_secimler();
+		   }
+
+
+
+}
+public : void alt_menu(){
+	       cout << "\n*************************" << endl;
+		   cout << "   Egitim Similasyonu" << endl;
+		   cout << "************************* \n\n" << endl;
+		   bekle(2);
+		   system("cls");
+		   cout <<"Kayıt başarılı. Lütfen giriş yaparak devam ediniz\n"<<endl;
+		   bekle(2);
+		   system("cls");
+		   user_giris();
+
+	
+}
+public :void alan_scm(){
+	cout<<"1)MF/mf"<<endl;
+	cout<<"2)Tm/tm"<<endl;
+	cout<<"3)TS/ts"<<endl;
+	cout<<"Lütfen alan belirtiniz.."<<endl;
+	cin>>alan;
+	drs_secim();
+}
+
+public:void user_giris(){
+		   system("cls");
+		   ifstream dosya1("kayit.txt", ios::in);
+		   string arananisim;
+		   int sifre;
+		   string ad;
+		   cout << "Kullanıcı Adı :";
+		   cin >> arananisim;
+		   cout << "Şifre : ";
+		   cin >> sifre;
+
+
+          while(!dosya1.eof()){
+
+		   if (dosya1.is_open())
+		   {
+
+
+			   dosya1 >> ad;
+			   dosya1 >> password;
+
+			   if (ad == arananisim && password == sifre)
+
+			   {
+
+
+				   system("cls");
+				   cout << "hoşgeldin  " << ad << endl;
+				   alan_scm();
+
+			}
+
+			   else
+
+			   {
+				   system("cls");
+				   cout << "kayıtlı kullanıcı bulunamadı Tekrar Giriş yapmayı deneyin" << endl;
+
+				   system("exit");
+				   ana_secimler();
+
+
+			   }
+		   }
+	}
+}
+
+
+
+
+
+
+public: void drs_secim(){
+	
+	system("cls");
+              if(alan==1){
+              	
+            cout << "\n1) Matematik";
+			cout << "\n2) Fizik";
+			cout << "\n3) Kimya";
+			cout << "\n4) Biyoloji";
+
+			cout << " \nDers seciniz: ";
+			cin >> ders_secim;
+			  }
+			
+	
+			
+
+
+}
+
+
+
+
+
+
+
+public:void bekle(int saniye){
+		   clock_t kalan;
+		   kalan = clock() + saniye*CLOCKS_PER_SEC;
+		   while (clock()<kalan){
+
+		   }
+}
+private : void yardim(){
+	
+	int secim;
+	cout<<"1)Hakkımızda : "<<endl;
+	cout<<"2)Program bilgisi : "<<endl;
+	cout<<"3)License : "<<endl;
+	cout<<"Lütfen yapmak istediğiniz işlemi  belirtiniz=>>";
+	cin>>secim;
+	if(secim==1){
+		
+		cout<<"Kahramanmaraş Sütçü İmam Üniversitesi bilgisayar mühendisliği bölümünde okuyan 4 gencin dönem projesi\n Bu kadar bilgi yeterli;)"<<endl;
+		bekle(1.5);
+		ana_secimler();
+		
+	}else if (secim==2){
+		cout<<"Buraya bilgi metni gelecek"<<endl;
+			bekle(1.5);
+		ana_secimler();
+		
+	}else if (secim==3){
+		cout<<"Bu bir lisanslı zebtekno ürünüdür. İzinsiz satışı ve kopyalanması yasaktır."<<endl;
+			bekle(1.5);
+		ana_secimler();
+	}
+	
+	
+	}
+
+};
+class matematik{
+	int secim;
+	public: void karar(){
+		cout<<"1)Konu Anlatımı : "<<endl;
+		cout<<"2)Soru Çözünü : "<<endl;
+		cout<<"Lütfen seçiniz>>"<<endl;
+		cin>>secim;
+		
+
+			if (secim==2){
+			mat_sorular();
+			mat_cevaplar();
+		
+	
+	}
+
+	}
+	
+	
+
+	public: void mat_sorular()
+				{
+
+			  ifstream dosyaOku("matsorulari.txt");
+			 string satir = "";
+
+			 if ( dosyaOku.is_open() ){
+
+			 while ( getline(dosyaOku, satir) ){
+			   cout << satir << endl;
+			  }
+
+			   dosyaOku.close();
+			 }
+
+			 
+			}
+
+
+
+
+		public: void mat_cevaplar()
+				{
+				
+					char matcvp[10];
+					int i,j;
+					char cvpkontrol[10] = {'a','b','c','d','a','b','c'};
+
+					
+					
+					for (i = 0; i < 9; i++)
+					{
+						cout << i+1 << " sorunun cevabını gir: " << endl;
+						cin >> matcvp[i];
+					}
+
+
+
+					
+				}
+
+};
+
+
+int main(){
+
+	setlocale(LC_ALL, "Turkish");
+	system("color 8f");
+
+
+
+	kayit menu;
+	menu.ana_secimler();
+
+
+
+
+	
+
+
+}
